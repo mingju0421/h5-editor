@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2932817",
+      "name": "按钮",
+      "font_class": "anniu",
+      "unicode": "e7fb",
+      "unicode_decimal": 59387
+    },
+    {
+      "icon_id": "10885439",
+      "name": "文本",
+      "font_class": "wenben",
+      "unicode": "e8c2",
+      "unicode_decimal": 59586
+    }
+  ]
+}
