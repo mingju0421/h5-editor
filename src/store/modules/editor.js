@@ -16,6 +16,19 @@ const state = {
 }
 
 const actions = {
+  /**
+   * 设置当前选中页面 uuid
+   */
+  setActivePageUUID({commit}, uuid) {
+    commit('setActivePageUUID', uuid)
+    // 当前选中页面切换后清空元素选中的 uuid
+    commit('setActiveElementUUID', '')
+  },
+  /**
+   * 初始化项目数据
+   * @param {*} param0 
+   * @param {*} data 
+   */
   setPrjectData({ commit, state, dispatch }, data) {
     let projectData = data
     if (!projectData) {
@@ -26,6 +39,7 @@ const actions = {
     if (!state.projectData.pages || !state.projectData.pages.length) {
       dispatch('addPage')
     }
+    dispatch('setActivePageUUID', state.projectData.pages[0].uuid)
   },
   // =====================  元素  ==============================
   /**
@@ -35,13 +49,10 @@ const actions = {
    */
   addElement({ commit }, elData) {
     debugger
-    let activePage = getters.activePage()
+    let activePage = getters.activePage(state)
     console.log(activePage)
     let data = editorProjectConfig.getElementConfig(elData, {
-      zIndex:
-        activePage.elements && activePage.elements.length
-          ? activePage.elements.length + 1
-          : 1,
+      zIndex:activePage.elements.length + 1
     })
     commit('addElement', data)
     commit('setActiveElementUUID', data.uuid)
@@ -54,7 +65,7 @@ const getters = {
    * 当前选中的页面, 如果不存在返回 -1
    */
   activePage() {
-    if (!state.projectData.page || !state.activePageUUID) {
+    if (!state.projectData.pages || !state.activePageUUID) {
       return { commonStyle: {}, config: {} }
     }
     return state.projectData.pages.find((v) => {
@@ -67,6 +78,9 @@ const getters = {
 }
 
 const mutations = {
+  setActivePageUUID(state, data) {
+    state.activePageUUID = data
+  },
   setProjectData(state, data) {
     state.projectData = data
   },
