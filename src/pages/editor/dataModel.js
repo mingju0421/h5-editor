@@ -95,9 +95,27 @@ let getElementConfig = (element, extendStyle = {}) => {
   return config
 }
 
+let getPageConfig = () => {
+  return {
+    uuid: createUUID(),
+    ...cloneDeep(pageConfig),
+  }
+}
+
+let getProjectConfig = () => {
+  let project = cloneDeep(projectConfig)
+  let onePage = getPageConfig()
+  project.pages.push({
+    ...onePage,
+  })
+  return { ...project }
+}
+
 export default {
   elementConfig,
   pageConfig,
   projectConfig,
   getElementConfig,
+  getProjectConfig,
+  getPageConfig,
 }

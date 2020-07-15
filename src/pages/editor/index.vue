@@ -67,6 +67,17 @@ export default {
     },
     computed: {
         ...mapGetters(['pageMode'])
+    },
+    created() {
+        this.$store.dispatch('setPrjectData')
+        this.id = this.$route.query.id || 123456
+        this.initPageData()
+    },
+    methods: {
+        /** 初始化页面数据 */
+        initPageData() {
+            console.log(`deitor-methods-initPageData`)
+        }
     }
 }
 </script>
