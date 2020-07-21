@@ -22,8 +22,9 @@
         <!-- 页面编辑区域 -->
         <div class="editor-main">
             <div class="control-bar-wrapper">
-                <controlBar></controlBar>
+                <controlBar :scale.sync="canvasConfig.scale"></controlBar>
             </div>
+            <editorPanel :scale.sync="canvasConfig.scale"></editorPanel>
         </div>
 
         <!-- 属性编辑区域 -->
@@ -46,13 +47,15 @@ const componentLibs = () => import(/* webpackChunkName: "componentLibs" */ './co
 const pageManage = () => import(/* webpackChunkName: "pageManage" */ './components/page-manage')
 const templateLibs = () => import(/* webpackChunkName: "templateLibs" */ './components/template-libs')
 const controlBar = () => import(/* webpackChunkName: "controlBar" */ './components/control-bar')
+const editorPanel = () => import(/* webpackChunkName: "editorPanel" */ './components/editor-panel/index')
 export default {
     name: 'editor-index',
     components: {
         componentLibs,
         pageManage,
         templateLibs,
-        controlBar
+        controlBar,
+        editorPanel,
     },
     data() {
         return {
@@ -63,6 +66,9 @@ export default {
                 { label: '页面管理', value: 'pageManage', elementUiIcon: 'el-icon-document', pageMode: 'h5' },
                 { label: '模板库', value: 'templateLibs', elementUiIcon: 'el-icon-files', pageMode: '' },
             ],
+            canvasConfig: {
+                scale: 1
+            }
         }
     },
     computed: {

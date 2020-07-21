@@ -1,12 +1,12 @@
 <template>
-    <div class="qk-text">
+    <div class="mj-text">
         {{text}}
     </div>
 </template>
 
 <script>
 export default {
-    name: 'text',
+    name: 'mjText',
     props: {
         text: {
             type: String,

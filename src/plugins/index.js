@@ -1,6 +1,9 @@
 /** 组件库入口 */
+import Text from './text'
 
-const components = []
+const components = [
+  Text,
+]
 
 const install = (Vue) => {
   if (install.installed) return

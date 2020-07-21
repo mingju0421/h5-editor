@@ -4,6 +4,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './common/iconfont/iconfont.css'
 import './common/css/reset.css'
 
+import VCharts from 'v-charts'
+Vue.use(VCharts)
+
 import App from './App.vue'
 import router from './router'
 import store from './store'

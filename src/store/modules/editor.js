@@ -17,6 +17,14 @@ const state = {
 
 const actions = {
   /**
+   * 设置当前选中的激活元素 uuid
+   * @param {*} param0 
+   * @param {*} uuid 
+   */
+  setActiveElementUUID({commit}, uuid) {
+    commit('setActiveElementUUID', uuid)
+  },
+  /**
    * 设置当前选中页面 uuid
    */
   setActivePageUUID({commit}, uuid) {
@@ -48,7 +56,6 @@ const actions = {
    * @param {*} elData
    */
   addElement({ commit }, elData) {
-    debugger
     let activePage = getters.activePage(state)
     console.log(activePage)
     let data = editorProjectConfig.getElementConfig(elData, {
@@ -58,6 +65,11 @@ const actions = {
     commit('setActiveElementUUID', data.uuid)
     commit('addHistoryCache')
   },
+  // =================== 历史记录 ==================
+  /** */
+  addHistoryCache({commit}) {
+    commit('addHistoryCache')
+  }
 }
 
 const getters = {
@@ -75,6 +87,34 @@ const getters = {
   pageMode(state) {
     return state.projectData.pageMode || 'h5'
   },
+  /**
+   * 当前选中的页面 index
+   * @param {*} state 
+   */
+  activeElementIndex(state) {
+    // 如果不存在页面返回 -1
+    if(!state.projectData.pages) {
+      return -1
+    }
+    let currentPageIndex = state.projectData.pages.findIndex(v => 
+      v.uuid === state.activePageUUID
+    )
+    if (currentPageIndex === -1) {
+      return -1
+    }
+    return state.projectData.pages[currentPageIndex].elements.findIndex(v => 
+      v.uuid === state.activeElementUUID
+    )
+  },
+  currentPageIndex(state) {
+    // 如果不存在页面返回 -1
+    if(!state.projectData.pages) {
+      return -1
+    }
+    return state.projectData.pages.findIndex(v => 
+      v.uuid === state.activePageUUID  
+    )
+  }
 }
 
 const mutations = {

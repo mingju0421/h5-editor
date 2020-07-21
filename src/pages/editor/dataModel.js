@@ -111,6 +111,41 @@ let getProjectConfig = () => {
   return { ...project }
 }
 
+/**
+ * 获取元素样式
+ */
+let getCommonStyle = (styleObj, scalingRatio = 1) => {
+  let needUnitStr = {
+    width: 1,
+    height: 1,
+    top: 1,
+    left: 1,
+    paddingTop: 1,
+    paddingLeft: 1,
+    paddingRight: 1,
+    paddingBottom: 1,
+    marginTop: 1,
+    marginLeft: 1,
+    marginRight: 1,
+    marginBottom: 1,
+    borderWidth: 1,
+    fontSize: 1,
+    borderRadius: 1,
+    letterSpacing: 1
+  }
+  let style = {}
+  for(let key of Object.keys(styleObj)) {
+    if(needUnitStr[key]) {
+      style[key] = (styleObj[key] * scalingRatio) + 'px'
+    }else {
+      style[key] = styleObj[key]
+    }
+  }
+  style.transform = `rotate(${style.rotate}deg)`
+  style.backgroundImage = style.backgroundImage ? `url(${style.backgroundImage})` : ''
+  return style
+}
+
 export default {
   elementConfig,
   pageConfig,
@@ -118,4 +153,5 @@ export default {
   getElementConfig,
   getProjectConfig,
   getPageConfig,
+  getCommonStyle
 }

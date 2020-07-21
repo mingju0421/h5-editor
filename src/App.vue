@@ -7,14 +7,17 @@
 
             <router-view />
         </div>
+        <!-- <A></A> -->
     </div>
 </template>
 
 <script>
 const PageHeader = () => import('./components/page-header')
+const A = () => import('./a')
 export default {
     components: {
-        PageHeader
+        PageHeader,
+        A
     }
 }
 </script>
